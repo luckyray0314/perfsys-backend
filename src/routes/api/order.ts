@@ -139,6 +139,9 @@ router.put("/:orderId", auth, async (req: AuthRequest, res: Response) => {
     owner: req.body.owner,
     completionDate: req.body.completionDate,
     readyDate: req.body.readyDate,
+    qScore: order.qScore,
+    cScore: order.cScore,
+    pScore: order.pScore
   };
   if (order) {
     await Order.findOneAndUpdate(

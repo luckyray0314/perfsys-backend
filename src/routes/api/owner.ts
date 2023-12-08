@@ -28,11 +28,7 @@ router.post("/add", auth, async (req: AuthRequest, res: Response) => {
     }
 })
 router.get("/all", auth, async (req: AuthRequest, res: Response) => {
-    if (req.user.role !== "admin") {
-      return res
-        .status(400)
-        .json({ msg: "You don't have permission to get data" });
-    }
+    
     const owners = await Owner.find().sort("owner");
     res.json(owners);
   });
