@@ -1,4 +1,4 @@
-import mongoose, { Schema, Model, model, ObjectId } from "mongoose";
+import { Schema, model} from "mongoose";
 
 const OrderSchema: Schema = new Schema({
   userId: {
@@ -6,7 +6,7 @@ const OrderSchema: Schema = new Schema({
     ref: "user",
   },
   orderPO: {
-    type: Number,
+    type: String,
     required: true,
   },
   customer: {

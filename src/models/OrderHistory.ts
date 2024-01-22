@@ -10,7 +10,7 @@ const OrderSchema: Schema = new Schema({
     ref: "user",
   },
   orderPO: {
-    type: Number,
+    type: String,
     required: true,
   },
   customer: {

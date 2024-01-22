@@ -44,14 +44,23 @@ router.post(
     if (user) {
       return res.status(400).json({ errors: [{ msg: "Email already exists" }] });
     }
-    const currentDate = new Date()
-    user = new User({
-      ...req.body,
-      role: "user",
-      status: "verified",
-      date: currentDate,
-    });
-
+    const currentDate = new Date();
+    let amount = (await User.find()).length;
+    if(amount === 0){
+      user = new User({
+        ...req.body,
+        role: "admin",
+        status: "verified",
+        date: currentDate,
+      });
+    } else {
+      user = new User({
+        ...req.body,
+        role: "user",
+        status: "verified",
+        date: currentDate,
+      });
+    }
     user.password = user.encryptPassword(user.password);
 
     await user.save();
@@ -186,7 +195,7 @@ router.delete(
         .json({ msg: "You don't have permission to delete user" });
     }
     await User.deleteOne({ _id: req.params.user_id });
-    res.json({ msg: "Delete Successfully" });
+    res.json(req.params.user_id);
   }
 );
 export default router;

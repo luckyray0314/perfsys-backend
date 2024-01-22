@@ -6,9 +6,10 @@ import order from "./routes/api/order";
 import factory from "./routes/api/factory";
 import customer from "./routes/api/customer";
 import owner from "./routes/api/owner";
+import sample from "./routes/api/sample"
 import satistics from "./routes/api/satistics";
 import connectDB from "./lib/dbConnect";
-import dotenv from "dotenv";
+ import dotenv from "dotenv";
 
 dotenv.config();
 const app: Express = express();
@@ -19,7 +20,7 @@ const path = require("path");
 connectDB();
 app.set("trust proxy", true);
 
-app.use(cors("*"));
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -30,6 +31,7 @@ app.use("/api/order", order);
 app.use("/api/factory", factory);
 app.use("/api/customer", customer);
 app.use("/api/owner", owner);
+app.use("/api/sample", sample);
 app.use("/api/satistics", satistics);
 app.get("/api/get-suv-version", (req, res) => {
   res.send(
